@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /visitor
+  tomcat:
+    uri-encoding: UTF-8
+
+
+spring:
+  datasource:
+    name: admin
+    url: jdbc:mysql://127.0.0.1:3306/visitor?useSSL=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    username: admin
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: dev
+    include: visitor
+  application:
+    name: visitor-yml
+
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.wanjia.visitor.entity
+
+
+logging:
+  level:
+    root: INFO
+    com.wanjia.visitor: DEBUG
