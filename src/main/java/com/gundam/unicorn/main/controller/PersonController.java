@@ -1,8 +1,8 @@
-package com.gumdan.unicorn.main.controller;
+package com.gundam.unicorn.main.controller;
 
-import com.gumdan.unicorn.entity.Person;
-import com.gumdan.unicorn.main.service.PersonService;
-import com.gumdan.unicorn.utils.Result;
+import com.gundam.unicorn.entity.Person;
+import com.gundam.unicorn.main.service.PersonService;
+import com.gundam.unicorn.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 /**
  * @author kampf
@@ -35,14 +36,14 @@ public class PersonController {
      * @param response
      * @return
      */
-    @ApiOperation(value = "查询用户列表", notes = "参数格式：" + "\"person\":\"\"")
+    @ApiOperation(value = "查询用户列表")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK!"),
             @ApiResponse(code = 500, message = "系统异常"),
             @ApiResponse(code = 503, message = "非法请求!"),
             @ApiResponse(code = 504, message = "请求次数过多!")})
     @PostMapping(value = "/personList")
     public Result list(Person person, HttpServletRequest request, HttpServletResponse response){
-        return personService.findPerson(person);
+        return personService.get();
     }
 
     /**
@@ -52,7 +53,7 @@ public class PersonController {
      * @param response
      * @return
      */
-    @ApiOperation(value = "保存用户(包含人员更新)", notes = "参数格式：" + "\"person\":\"\"")
+    @ApiOperation(value = "保存用户")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK!"),
             @ApiResponse(code = 500, message = "系统异常"),
             @ApiResponse(code = 501, message = "参数校验异常"),
@@ -60,19 +61,39 @@ public class PersonController {
             @ApiResponse(code = 503, message = "非法请求!"),
             @ApiResponse(code = 504, message = "请求次数过多!")})
     @PostMapping(value = "/personSave")
-    public Result save(@RequestBody Person person, HttpServletRequest request, HttpServletResponse response){
-        return personService.savePerson(person);
+    public Result add(@RequestBody @Valid Person person, HttpServletRequest request, HttpServletResponse response){
+        return personService.add(person);
+    }
+
+    /**
+     * 修改用户信息接口
+     * 本质上和保存没有区别，只是为了前端调用接口清晰特意写了两个接口
+     * @param person
+     * @param request
+     * @param response
+     * @return
+     */
+    @ApiOperation(value = "更新用户")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK!"),
+            @ApiResponse(code = 500, message = "系统异常"),
+            @ApiResponse(code = 501, message = "参数校验异常"),
+            @ApiResponse(code = 502, message = "没有SESSION!"),
+            @ApiResponse(code = 503, message = "非法请求!"),
+            @ApiResponse(code = 504, message = "请求次数过多!")})
+    @PostMapping(value = "/personUpdate")
+    public Result update(@RequestBody @Valid Person person, HttpServletRequest request, HttpServletResponse response){
+        return personService.update(person);
     }
 
 
-    @ApiOperation(value = "删除用户", notes = "参数格式：" + "\"personId\":\"\"")
+    @ApiOperation(value = "删除用户")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK!"),
             @ApiResponse(code = 500, message = "系统异常"),
             @ApiResponse(code = 503, message = "非法请求!"),
             @ApiResponse(code = 504, message = "请求次数过多!")})
     @DeleteMapping(value = "/personDelete")
     public Result delete(@RequestBody String personId, HttpServletRequest request, HttpServletResponse response){
-        return personService.deletePerson(personId);
+        return personService.delete(personId);
     }
 
 }

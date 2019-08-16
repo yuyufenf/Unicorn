@@ -1,4 +1,4 @@
-package com.gumdan.unicorn;
+package com.gundam.unicorn.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.wanjia.visitor.main.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com..gundam.unicorn.main.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -45,7 +45,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("独立访客服务Swagger APIs")
                 .version("v 1.0")
-                .termsOfServiceUrl("http://localhost:8080/visitor/swagger-ui.html")
+                .termsOfServiceUrl("http://localhost:8080/unicorn/swagger-ui.html")
                 .build();
     }
 }

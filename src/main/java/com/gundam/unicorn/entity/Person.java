@@ -1,7 +1,12 @@
-package com.gumdan.unicorn.entity;
+package com.gundam.unicorn.entity;
 
 import java.util.Date;
 
+/**
+ * 用户实体类（框架使用说明类）
+ * @author kampf
+ * @date 2019/08/16 18：49
+ */
 public class Person extends BaseEntity<Person>{
 
     /**

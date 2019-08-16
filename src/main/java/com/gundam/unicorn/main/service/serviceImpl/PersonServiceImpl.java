@@ -1,9 +1,9 @@
-package com.gumdan.unicorn.main.service.serviceImpl;
+package com.gundam.unicorn.main.service.serviceImpl;
 
-import com.gumdan.unicorn.entity.Person;
-import com.gumdan.unicorn.main.dao.PersonDao;
-import com.gumdan.unicorn.main.service.PersonService;
-import com.gumdan.unicorn.utils.Result;
+import com.gundam.unicorn.entity.Person;
+import com.gundam.unicorn.main.dao.PersonDao;
+import com.gundam.unicorn.main.service.PersonService;
+import com.gundam.unicorn.utils.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

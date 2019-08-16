@@ -1,13 +1,13 @@
-package com.gumdan.unicorn;
+package com.gundam.unicorn;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class VisitorApplication {
+public class UnicornApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(VisitorApplication.class, args);
+        SpringApplication.run(UnicornApplication.class, args);
     }
 
 }

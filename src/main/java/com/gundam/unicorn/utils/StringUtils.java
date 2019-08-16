@@ -1,4 +1,4 @@
-package com.gumdan.unicorn.utils;
+package com.gundam.unicorn.utils;
 
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
-package com.gumdan.unicorn.main.dao;
+package com.gundam.unicorn.main.dao;
 
-import com.gumdan.unicorn.entity.Person;
+import com.gundam.unicorn.entity.Person;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

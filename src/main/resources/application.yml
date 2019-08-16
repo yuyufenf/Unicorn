@@ -1,7 +1,7 @@
 server:
   port: 8080
   servlet:
-    context-path: /visitor
+    context-path: /unicorn
   tomcat:
     uri-encoding: UTF-8
 
@@ -9,7 +9,7 @@ server:
 spring:
   datasource:
     name: admin
-    url: jdbc:mysql://127.0.0.1:3306/visitor?useSSL=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://127.0.0.1:3306/unicorn?useSSL=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
     username: admin
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,7 +22,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
-  type-aliases-package: com.wanjia.visitor.entity
+  type-aliases-package: com.gundam.unicorn.entity
 
 
 logging:

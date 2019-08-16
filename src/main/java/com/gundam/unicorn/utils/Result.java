@@ -1,9 +1,17 @@
-package com.gumdan.unicorn.utils;
+package com.gundam.unicorn.utils;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
+ * 通用返回响应体，返回JSON，返回格式为
+ *  {
+ *     code：200
+ *     msg：SUCCESS
+ *     data：{
+ *        JSONKey：JSONValue
+ *     }
+ *  }
  * @author kampf
  * @date 2019/7/19 11:55
  */
@@ -43,6 +51,10 @@ public class Result<T> {
         this.data = data;
     }
 
+    /**
+     * 打印参数方法
+     * @return
+     */
     @Override
     public String toString() {
         return  "code='" + code + '\'' + "\n" +
@@ -56,7 +68,7 @@ public class Result<T> {
      */
     public Result(T data){
         this.code = 200;
-        this.msg = "SUCCESS";
+        this.msg = "OK !";
         this.data = data;
     }
 

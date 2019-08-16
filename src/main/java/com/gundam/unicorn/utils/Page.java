@@ -1,4 +1,4 @@
-package com.gumdan.unicorn.utils;
+package com.gundam.unicorn.utils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Value;
