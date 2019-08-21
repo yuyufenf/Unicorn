@@ -1,5 +1,10 @@
 package com.gundam.unicorn.config;
 
+import com.gundam.unicorn.utils.exception.IsNullException;
+import com.gundam.unicorn.utils.Result;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
@@ -9,4 +14,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    @ExceptionHandler(IsNullException.class)
+    public Result returnAnno(IsNullException e){
+        return Result.error(Result.SERVER_ERROR, e.getMessage());
+    }
 }

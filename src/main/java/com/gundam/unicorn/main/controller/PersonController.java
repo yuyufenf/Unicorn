@@ -3,6 +3,7 @@ package com.gundam.unicorn.main.controller;
 import com.gundam.unicorn.entity.Person;
 import com.gundam.unicorn.main.service.PersonService;
 import com.gundam.unicorn.utils.Result;
+import com.gundam.unicorn.utils.annotation.ValueNotBlank;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -17,12 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 /**
+ * 账号管理controller
  * @author kampf
  * @date 2019/7/19 11:24
  */
 @RestController
 @RequestMapping(value = "/person")
-@Api(tags = "用户信息处理controller")
+@Api(tags = "账号信息处理controller")
 public class PersonController {
     private static final Logger LOG = LoggerFactory.getLogger(PersonController.class);
 
@@ -30,30 +32,29 @@ public class PersonController {
     private PersonService personService;
 
     /**
-     * 查询用户列表接口
-     * @param person
+     * 查询账号列表接口
      * @param request
      * @param response
      * @return
      */
-    @ApiOperation(value = "查询用户列表")
+    @ApiOperation(value = "查询账号列表")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK!"),
             @ApiResponse(code = 500, message = "系统异常"),
             @ApiResponse(code = 503, message = "非法请求!"),
             @ApiResponse(code = 504, message = "请求次数过多!")})
     @PostMapping(value = "/personList")
-    public Result list(Person person, HttpServletRequest request, HttpServletResponse response){
+    public Result list(HttpServletRequest request, HttpServletResponse response){
         return personService.get();
     }
 
     /**
-     * 保存用户信息接口
+     * 保存账号信息接口
      * @param person
      * @param request
      * @param response
      * @return
      */
-    @ApiOperation(value = "保存用户")
+    @ApiOperation(value = "保存账号")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK!"),
             @ApiResponse(code = 500, message = "系统异常"),
             @ApiResponse(code = 501, message = "参数校验异常"),
@@ -66,14 +67,14 @@ public class PersonController {
     }
 
     /**
-     * 修改用户信息接口
+     * 修改账号信息接口
      * 本质上和保存没有区别，只是为了前端调用接口清晰特意写了两个接口
      * @param person
      * @param request
      * @param response
      * @return
      */
-    @ApiOperation(value = "更新用户")
+    @ApiOperation(value = "更新账号")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK!"),
             @ApiResponse(code = 500, message = "系统异常"),
             @ApiResponse(code = 501, message = "参数校验异常"),
@@ -86,13 +87,13 @@ public class PersonController {
     }
 
 
-    @ApiOperation(value = "删除用户")
+    @ApiOperation(value = "删除账号")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK!"),
             @ApiResponse(code = 500, message = "系统异常"),
             @ApiResponse(code = 503, message = "非法请求!"),
             @ApiResponse(code = 504, message = "请求次数过多!")})
     @DeleteMapping(value = "/personDelete")
-    public Result delete(@RequestBody String personId, HttpServletRequest request, HttpServletResponse response){
+    public Result delete(@RequestBody @ValueNotBlank String personId, HttpServletRequest request, HttpServletResponse response){
         return personService.delete(personId);
     }
 

@@ -1,4 +1,4 @@
-package com.gundam.unicorn.intercepter;
+package com.gundam.unicorn.utils.intercepter;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

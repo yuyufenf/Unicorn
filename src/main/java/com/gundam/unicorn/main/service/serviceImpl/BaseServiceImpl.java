@@ -7,15 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * 通用实现类封装
  * @author kampf
  * @date 2019/8/16 19:42
  */
 @Service
 public class BaseServiceImpl<T> implements BaseService<T> {
 
-    /**
-     * 报错是因为加载配置文件时才会扫描自动注入，预编译会找不到bean注入
-     */
     @Autowired
     BaseDao baseDao;
 

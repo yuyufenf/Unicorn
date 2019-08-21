@@ -1,5 +1,7 @@
 package com.gundam.unicorn.entity;
 
+import com.gundam.unicorn.utils.annotation.FieldNotBlank;
+
 import java.util.Date;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Date;
  * @author kampf
  * @date 2019/08/16 18：49
  */
-public class Person extends BaseEntity<Person>{
+public class Person extends BaseEntity{
 
     /**
      *
@@ -16,6 +18,7 @@ public class Person extends BaseEntity<Person>{
      *
      * @mbg.generated
      */
+    @FieldNotBlank(name = "personName")
     private String personName;
 
     /**
@@ -25,6 +28,7 @@ public class Person extends BaseEntity<Person>{
      *
      * @mbg.generated
      */
+    @FieldNotBlank(name = "personCode")
     private String personCode;
 
     /**

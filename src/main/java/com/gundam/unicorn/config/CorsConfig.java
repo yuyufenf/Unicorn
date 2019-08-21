@@ -1,6 +1,6 @@
 package com.gundam.unicorn.config;
 
-import com.gundam.unicorn.intercepter.ApiInterceptorUser;
+import com.gundam.unicorn.utils.intercepter.ApiInterceptorUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import springfox.documentation.builders.ApiInfoBuilder;
 
 /**
  * 跨域请求控制
