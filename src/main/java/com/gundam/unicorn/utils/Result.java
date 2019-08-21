@@ -66,9 +66,9 @@ public class Result<T> {
      * 请求成功的构造函数
      * @param data
      */
-    public Result(T data){
+    public Result(T data, String msg){
         this.code = 200;
-        this.msg = "OK !";
+        this.msg = msg;
         this.data = data;
     }
 
@@ -85,7 +85,7 @@ public class Result<T> {
     /**服务端基础异常枚举*/
     public static Result SERVER_ERROR = new Result(500,"系统异常：%s");
     public static Result BIND_ERROR = new Result(501,"(绑定异常)参数校验异常：%s");
-    public static Result SESSION_ERROR = new Result(502,"没有SESSION！");
+    public static Result SESSION_ERROR = new Result(502,"SESSION异常! : %s");
     public static Result REQUEST_ERROR = new Result(503,"非法请求！");
     public static Result REQUEST_OVER_LIMIT = new Result(504,"请求次数过多！");
 
@@ -95,8 +95,8 @@ public class Result<T> {
      * @param <T>
      * @return
      */
-    public static <T> Result<T> success(T data){
-        return new Result<>(data);
+    public static <T> Result<T> success(T data, String msg){
+        return new Result<>(data, msg);
     }
 
     /**

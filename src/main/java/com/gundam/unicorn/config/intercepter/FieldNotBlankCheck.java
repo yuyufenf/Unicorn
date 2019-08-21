@@ -1,4 +1,4 @@
-package com.gundam.unicorn.utils.intercepter;
+package com.gundam.unicorn.config.intercepter;
 
 import com.gundam.unicorn.utils.annotation.FieldNotBlank;
 import com.gundam.unicorn.utils.exception.IsNullException;

@@ -8,12 +8,12 @@
         <version>2.1.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.wanjia</groupId>
-    <artifactId>visitor</artifactId>
+    <groupId>com.gandam</groupId>
+    <artifactId>Unicorn</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>visitor</name>
-    <description>Project for Spring Boot</description>
+    <name>Unicorn</name>
+    <description>Project for Spring Boot with ourselves</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -97,6 +97,13 @@
         </dependency>
         <!-- apache.poi office文档控制插件 end -->
 
+        <!-- token认证 start -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <!-- token认证 end -->
     </dependencies>
     <build>
         <plugins>

@@ -137,4 +137,19 @@
   <select id="get" resultType="com.gundam.unicorn.entity.Person">
         select * from unicorn_person where status = 1;
   </select>
+
+  <!--通过登陆名获取用户-->
+  <select id="findUserByUserName" resultType="java.lang.String">
+        select upassword from unicorn_person where ustaffno=#{userName}
+    </select>
+
+  <!-- 获取用户的角色 -->
+  <select id="getUserRole" resultType="java.lang.String" parameterType="String">
+        select b.rkey from unicorn_person a,unicorn_role b where ustaffno=#{userName} and a.urole=b.rid
+    </select>
+
+  <!-- 获取用户所拥有的权限 -->
+  <select id="getUserRolePowers" resultType="map" parameterType="String">
+        select d.pid,d.pname,d.plevel from unicorn_person a,unicorn_role_permission c,unicorn_permission d where ustaffno=#{userName} and a.urole=c.rid and c.pid=d.pid
+    </select>
 </mapper>

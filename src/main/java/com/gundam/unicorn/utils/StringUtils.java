@@ -75,4 +75,27 @@ public class StringUtils {
 
         return true;
     }
+
+    /**
+     *
+     * @param object
+     * @param target
+     * @return
+     */
+    public static boolean containArr(String[] object, String[] target) {
+        boolean flag = false;
+        for (int i = 0; i < target.length; i++) {
+            System.out.println(target[i]);
+            for (int j = 0; j < object.length; j++) {
+                System.out.println(object[j]);
+                if (target[i].equals(object[j])) {
+                    flag = true;
+                    break;
+                } else {
+                    flag = false;
+                }
+            }
+        }
+        return flag;
+    }
 }

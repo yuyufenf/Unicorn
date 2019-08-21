@@ -9,59 +9,61 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author kampf
  * @date 2019/7/19 11:30
  */
 @Service
-public class PersonServiceImpl implements PersonService {
-    private static final Logger LOG = LoggerFactory.getLogger(PersonServiceImpl.class);
+public class PersonServiceImpl extends BaseServiceImpl<Person> implements PersonService {
+    private static final Logger log = LoggerFactory.getLogger(PersonServiceImpl.class);
 
     @Resource
     private PersonDao personDao;
 
-    @Override
-    public Result findPerson(Person person){
 
-        List list = personDao.selectBySearch(person);
-        //TODO 分页尚未完成
-        return Result.success(list);
+    /**
+     * 进行Token验证
+     */
+    @Override
+    public String findUserByUserName(String staffNum) {
+        if (staffNum != null && !("").equals(staffNum)) {
+            return personDao.findUserByUserName(staffNum);
+        }
+        return null;
     }
 
+    /**
+     * 获取用户角色
+     */
     @Override
-    public Result savePerson(Person person){
-        if(person.getPersonName() == null || "".equals(person.getPersonName())){
-            return Result.error(Result.SERVER_ERROR, "没有填写必要信息");
+    public String getUserRole(String staffNum) {
+        if (staffNum != null && !("").equals(staffNum)) {
+            return personDao.getUserRole(staffNum);
         }
-
-        int result;
-
-        if(person.getId() != null || "".equals(person.getId())){
-            result = personDao.updateByPrimaryKey(person);
-        }else {
-            result = personDao.insert(person);
-        }
-
-        if(result > 0){
-            return Result.success("用户保存成功");
-        } else {
-            return Result.error(Result.SERVER_ERROR, "用户保存失败");
-        }
+        return null;
     }
 
+    /**
+     * 获取用户拥有的权限
+     */
     @Override
-    public Result deletePerson(String personId){
-        if(personId == null || "".equals(personId)){
-            return Result.error(Result.SERVER_ERROR, "无法获取需要删除人员Id");
+    public List< String> getUserRolePowers(String staffNum) {
+        if (staffNum != null && !("").equals(staffNum)) {
+            List<Map<String, String>> powers = personDao.getUserRolePowers(staffNum);
+            List<String> powerList = new ArrayList<>();
+            for (Map<String, String> power : powers){
+                String powerName = power.get("pname");
+                String powerLevel = power.get("plevel");
+                if (!("1").equals(powerLevel)){
+                    powerList.add(powerName);
+                }
+            }
+            return powerList;
         }
-
-        int result = personDao.deleteByPrimaryKey(personId);
-
-        if (result > 0){
-            return Result.success("用户删除成功");
-        }
-        return Result.error(Result.SERVER_ERROR, "用户删除失败");
+        return null;
     }
 }

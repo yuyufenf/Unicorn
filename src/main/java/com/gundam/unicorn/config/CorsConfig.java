@@ -1,6 +1,6 @@
 package com.gundam.unicorn.config;
 
-import com.gundam.unicorn.utils.intercepter.ApiInterceptorUser;
+import com.gundam.unicorn.config.intercepter.UnicornInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -9,10 +9,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 跨域请求控制
+ * 跨域请求控制合并拦截器控制
  * @author kampf
  * @date 2019/7/22 08:50
  */
@@ -20,8 +21,33 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfig implements WebMvcConfigurer {
 
     @Autowired
-    ApiInterceptorUser apiInterceptorUser;
+    UnicornInterceptor unicornInterceptor;
 
+    /**
+     * 用于加载静态资源配置，html，js，css等
+     * @param registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry){
+    }
+
+    /**
+     * 注册拦截器，自定义需要在此注册生效
+     * @return
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
+        /**
+         * swagger需要过滤，将其添置在自定义
+         */
+        registry.addInterceptor(unicornInterceptor).addPathPatterns("/**")
+                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg", "/*.html", "/**/*.html","/swagger-resources/**");
+    }
+
+    /**
+     * 设置跨域
+     * @return
+     */
     @Bean
     public FilterRegistrationBean corsFilter(){
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -30,16 +56,6 @@ public class CorsConfig implements WebMvcConfigurer {
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(0);
         return bean;
-    }
-
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry){
-        /**
-         * swagger需要过滤
-         */
-        registry.addInterceptor(apiInterceptorUser).addPathPatterns("/**")
-                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg", "/*.html", "/**/*.html","/swagger-resources/**");
     }
 
     /**

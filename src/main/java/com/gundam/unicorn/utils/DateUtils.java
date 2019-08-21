@@ -8,7 +8,7 @@ import java.util.Date;
  * @author kampf
  * @date 2019/7/18 10:55
  */
-public class DataUtils {
+public class DateUtils {
 
     /**
      * 时间格式 yyyy-MM-dd HH:mm:ss
