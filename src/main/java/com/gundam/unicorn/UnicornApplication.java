@@ -1,24 +1,18 @@
 package com.gundam.unicorn;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Configuration;
 
 /**
- * 启动项
+ * 启动主方法
  * @author kampf
- * @date 2019/08/22
+ * @date 2019/08/22 11:44
  */
-@Configuration
-@EnableAutoConfiguration
-public class UnicornApplication extends SpringBootServletInitializer {
+@SpringBootApplication
+public class UnicornApplication {
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
-       return application.sources(UnicornApplication.class);
+    public static void main(String[] args) {
+        SpringApplication.run(UnicornApplication.class, args);
     }
 
 }
