@@ -15,9 +15,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   profiles:
     active: dev
-    include: visitor
+    include: unicorn
   application:
-    name: visitor-yml
+    name: unicorn-yml
 
 
 mybatis:
@@ -28,4 +28,4 @@ mybatis:
 logging:
   level:
     root: INFO
-    com.wanjia.visitor: DEBUG
+    com.gundam.unicorn: DEBUG
