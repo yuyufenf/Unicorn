@@ -1,5 +1,9 @@
 package com.gundam.unicorn.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
@@ -7,6 +11,8 @@ import java.util.UUID;
  * @date 2019/7/18 14:18
  */
 public class StringUtils {
+
+    private static final Logger log = LoggerFactory.getLogger(StringUtils.class);
 
     /**
      * 空校验
@@ -77,7 +83,7 @@ public class StringUtils {
     }
 
     /**
-     *
+     * 字符数组对比
      * @param object
      * @param target
      * @return
@@ -97,5 +103,57 @@ public class StringUtils {
             }
         }
         return flag;
+    }
+
+    /**
+     * 将GDK转换成Latin1
+     * @param str
+     * @return
+     */
+    public static String converGBK2Lation(String str){
+        try{
+            if(StringUtils.isEmpty(str)){
+                return "";
+            }
+            String latin = new String(str.getBytes("GBK"), StandardCharsets.ISO_8859_1);
+            return latin;
+        }catch(Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * GBK转UTF-8
+     * @param str
+     * @return
+     */
+    public static String converGBK2UTF(String str){
+        try{
+            if(StringUtils.isEmpty(str)){
+                return "";
+            }
+            String latin = new String(str.getBytes("GBK"), StandardCharsets.UTF_8);
+            return latin;
+        }catch(Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            return null;
+        }
+    }
+
+    public static String converLatin2UTF(String str){
+        try{
+            if(StringUtils.isEmpty(str)){
+                return "";
+            }
+            String latin = new String(str.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+            return latin;
+        }catch(Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            return null;
+        }
     }
 }
