@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(IsNullException.class)
-    public Result returnAnno(IsNullException e){
+    public Result getNullException(IsNullException e){
         log.debug(IsNullException.class + "被抓取");
         return Result.error(Result.SERVER_ERROR, e.getMessage());
     }
@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(PermissionDeniedException.class)
-    public Result returnPDE(PermissionDeniedException e){
+    public Result getPermissionException(PermissionDeniedException e){
         log.debug(PermissionDeniedException.class + "被抓取");
         return Result.error(Result.SESSION_ERROR, e.getMessage());
     }

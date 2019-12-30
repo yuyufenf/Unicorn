@@ -1,5 +1,6 @@
 package com.gundam.unicorn.config.intercepter;
 
+import com.gundam.unicorn.utils.StringUtils;
 import com.gundam.unicorn.utils.annotation.ValueNotBlank;
 import com.gundam.unicorn.utils.exception.IsNullException;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -97,7 +98,7 @@ public class ValueNotBlankCheck {
      * @param value
      */
     private void paramIsNull(Object value, String msg){
-        if(value == null || "".equals(value.toString().trim())){
+        if(StringUtils.isBlank(value)){
             throw new IsNullException(msg);
         }
     }

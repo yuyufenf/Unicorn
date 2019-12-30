@@ -9,10 +9,6 @@ public class PermissionDeniedException extends RuntimeException {
 
     private final String msg;
 
-    public String getMsg(){
-        return msg;
-    }
-
     public PermissionDeniedException(String msg){
         super("");
         this.msg = msg;

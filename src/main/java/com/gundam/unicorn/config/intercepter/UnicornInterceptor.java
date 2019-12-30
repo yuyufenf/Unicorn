@@ -12,8 +12,7 @@ import com.gundam.unicorn.utils.annotation.Authority;
 import com.gundam.unicorn.utils.annotation.PassLogin;
 import com.gundam.unicorn.utils.annotation.PassToken;
 import com.gundam.unicorn.utils.exception.PermissionDeniedException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -31,10 +30,9 @@ import java.util.List;
  * @author kampf
  * @date 2019/8/16 19:34
  */
+@Slf4j
 @Component
 public class UnicornInterceptor implements HandlerInterceptor {
-
-    private static final Logger log = LoggerFactory.getLogger(UnicornInterceptor.class);
 
     @Autowired
     PersonService personService;
@@ -47,7 +45,7 @@ public class UnicornInterceptor implements HandlerInterceptor {
      * @return
      */
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         //从请求头中取出token
         String token = request.getHeader("Token");
@@ -85,11 +83,10 @@ public class UnicornInterceptor implements HandlerInterceptor {
         return false;
     }
 
-    private boolean loginCheck(String token, Method method){
+    private void loginCheck(String token, Method method){
         // 执行认证
         if (token == null) {
-            new PermissionDeniedException("无token，请重新登录");
-            return false;
+            throw new PermissionDeniedException("无token，请重新登录");
         }
 
         String staffNum;
@@ -97,13 +94,11 @@ public class UnicornInterceptor implements HandlerInterceptor {
             staffNum = JWT.decode(token).getAudience().get(0);
         } catch (JWTDecodeException j) {
             log.error("############User Interceptor Exception,Reason:" + j.getMessage());
-            new PermissionDeniedException("非法token，请重新登录");
-            return false;
+            throw new PermissionDeniedException("非法token，请重新登录");
         }
         String pwd = personService.findUserByUserName(staffNum);
         if (pwd == null) {
-            new PermissionDeniedException("用户不存在");
-            return false;
+            throw new PermissionDeniedException("用户不存在");
         }
         // 验证 token
         JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(pwd)).build();
@@ -111,8 +106,7 @@ public class UnicornInterceptor implements HandlerInterceptor {
             jwtVerifier.verify(token);
         } catch (JWTVerificationException e) {
             log.error("############User Interceptor Exception,Reason:" + e.getMessage());
-            new PermissionDeniedException("token已失效,请重新登录");
-            return false;
+            throw new PermissionDeniedException("token已失效,请重新登录");
         }
 
         // 验证token通过后，再检查是否有PowerPrivilege注解
@@ -128,7 +122,7 @@ public class UnicornInterceptor implements HandlerInterceptor {
                 // 使用用户名与数据库中该用户的角色进行匹对,返回角色key
                 String roleKey = personService.getUserRole(staffNum);
                 if (roleList.contains(roleKey)) {
-                    return true;
+                    return;
                 }
             }
 
@@ -147,14 +141,12 @@ public class UnicornInterceptor implements HandlerInterceptor {
                     System.out.println(authorityName);
                     String[] authorityNames = authorityName.split(",");
                     if (StringUtils.containArr(authorityNames, authorities)) {
-                        return true;
+                        return;
                     }
                 }
             }
 
-            new PermissionDeniedException("没有权限访问");
-            return false;
+            throw new PermissionDeniedException("没有权限访问");
         }
-        return true;
     }
 }

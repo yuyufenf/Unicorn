@@ -9,10 +9,6 @@ public class IsNullException extends RuntimeException {
 
     private final String msg;
 
-    public String getMsg(){
-        return msg;
-    }
-
     public IsNullException(String msg){
         super("");
         this.msg = msg;

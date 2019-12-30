@@ -13,23 +13,23 @@ public class DateUtils {
     /**
      * 时间格式 yyyy-MM-dd HH:mm:ss
      */
-    public static final String TYPEONE = "1";
+    public static final String FULL_DATE_TIME = "1";
     /**
      * 时间格式 yyyy-MM-dd
      */
-    public static final String TYPETWO = "2";
+    public static final String JUST_DATE = "2";
     /**
      * 时间格式 yyyy年MM月dd日
      */
-    public static final String TYPETHREE = "3";
+    public static final String JUST_DATE_CHS = "3";
     /**
      * 时间格式 yyyy年MM月dd日 HH时mm分ss秒
      */
-    public static final String TYPEFOUR = "4";
+    public static final String FULL_DATE_TIME_CHS = "4";
     /**
      * DIY时间格式
      */
-    public static final String TYPEDIY = "5";
+    public static final String DIYDATE = "5";
 
     /**
      * 生成时间格式类

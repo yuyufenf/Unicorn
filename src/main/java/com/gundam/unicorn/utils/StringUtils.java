@@ -156,4 +156,22 @@ public class StringUtils {
             return null;
         }
     }
+
+    /**
+     * 字符串非空校验
+     * @param str
+     * @return
+     */
+    public static boolean isBlank(String str){
+        return str == null || "".equals(str.trim());
+    }
+
+    /**
+     * 对象非空校验
+     * @param obj
+     * @return
+     */
+    public static boolean isBlank(Object obj){
+        return obj == null || "".equals(obj.toString().trim());
+    }
 }

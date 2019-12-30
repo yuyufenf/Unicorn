@@ -1,5 +1,6 @@
 package com.gundam.unicorn.config.intercepter;
 
+import com.gundam.unicorn.utils.StringUtils;
 import com.gundam.unicorn.utils.annotation.FieldNotBlank;
 import com.gundam.unicorn.utils.exception.IsNullException;
 
@@ -47,7 +48,7 @@ public class FieldNotBlankCheck implements ConstraintValidator<FieldNotBlank, St
 
         //判断属性值是否为空
         if(flag) {
-            if (value.equals("") || value == null) {
+            if (StringUtils.isBlank(value)) {
                 //这里我们创建一个我们之前设定的异常好让抓取类抓住
                 throw new IsNullException(msg);
             } else {

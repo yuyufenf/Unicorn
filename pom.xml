@@ -104,6 +104,22 @@
             <version>3.4.0</version>
         </dependency>
         <!-- token认证 end -->
+
+        <!--lombok组件 start-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.2</version>
+        </dependency>
+        <!--lombok组件 end-->
+
+        <!--swagger新UI start-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>1.9.6</version>
+        </dependency>
+        <!--swagger新UI end-->
     </dependencies>
     <build>
         <plugins>
