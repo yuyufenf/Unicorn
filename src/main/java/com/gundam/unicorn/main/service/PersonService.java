@@ -16,18 +16,4 @@ public interface PersonService extends BaseService<Person> {
      * @return
      */
     String findUserByUserName(String staffNum);
-
-    /**
-     * 获取用户角色
-     * @param staffNum
-     * @return
-     */
-    String getUserRole(String staffNum);
-
-    /**
-     * 获取用户拥有的权限
-     * @param staffNum
-     * @return
-     */
-    List<String> getUserRolePowers(String staffNum);
 }

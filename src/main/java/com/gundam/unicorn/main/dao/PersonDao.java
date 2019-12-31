@@ -20,17 +20,4 @@ public interface PersonDao extends BaseDao<Person>{
      */
     String findUserByUserName(String userName);
 
-    /**
-     * 根据登陆查询用户角色
-     * @param userName
-     * @return
-     */
-    String getUserRole(String userName);
-
-    /**
-     * 根据用户名协同用户角色查询用户权限级别
-     * @param userName
-     * @return
-     */
-    List<Map<String,String>> getUserRolePowers(String userName);
 }

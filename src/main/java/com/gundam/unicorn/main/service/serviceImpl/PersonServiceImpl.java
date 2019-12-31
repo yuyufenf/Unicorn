@@ -35,35 +35,4 @@ public class PersonServiceImpl extends BaseServiceImpl<Person> implements Person
         }
         return null;
     }
-
-    /**
-     * 获取用户角色
-     */
-    @Override
-    public String getUserRole(String staffNum) {
-        if (staffNum != null && !("").equals(staffNum)) {
-            return personDao.getUserRole(staffNum);
-        }
-        return null;
-    }
-
-    /**
-     * 获取用户拥有的权限
-     */
-    @Override
-    public List< String> getUserRolePowers(String staffNum) {
-        if (staffNum != null && !("").equals(staffNum)) {
-            List<Map<String, String>> powers = personDao.getUserRolePowers(staffNum);
-            List<String> powerList = new ArrayList<>();
-            for (Map<String, String> power : powers){
-                String powerName = power.get("pname");
-                String powerLevel = power.get("plevel");
-                if (!("1").equals(powerLevel)){
-                    powerList.add(powerName);
-                }
-            }
-            return powerList;
-        }
-        return null;
-    }
 }

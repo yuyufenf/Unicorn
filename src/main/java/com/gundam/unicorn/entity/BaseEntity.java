@@ -2,6 +2,7 @@ package com.gundam.unicorn.entity;
 
 import com.gundam.unicorn.utils.StringUtils;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
  * @author kampf
  * @date 2019/7/18 10:43
  */
+@Data
 public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 2791885284390539379L;
@@ -30,46 +32,6 @@ public abstract class BaseEntity implements Serializable {
     @ApiModelProperty(value = "字段备注以及替换")
     protected String remark;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Date getCreateData() {
-        return createData;
-    }
-
-    public void setCreateData(Date createData) {
-        this.createData = createData;
-    }
-
-    public String getCreateName() {
-        return createName;
-    }
-
-    public void setCreateName(String createName) {
-        this.createName = createName;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     /**
      * 构造函数初始化
      */
@@ -85,10 +47,13 @@ public abstract class BaseEntity implements Serializable {
      */
     @Override
     public String toString() {
-        return  "id='" + id + '\'' + "\n" +
-                "createData='" + createData + '\'' + "\n"+
-                "createName='" + createName + '\'' + "\n" +
-                "status='" + status + '\'' + "\n" +
-                "remark='" + remark + '\'' + "\n" ;
+        StringBuffer sb = new StringBuffer();
+        sb.append(getClass().getSimpleName());
+        sb.append("id:").append(id);
+        sb.append(", createData:").append(createData);
+        sb.append(", createName:").append(createName);
+        sb.append(", status:").append(status);
+        sb.append(", remark:").append(remark);
+        return  sb.toString();
     }
 }

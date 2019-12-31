@@ -9,9 +9,9 @@ server:
 spring:
   datasource:
     name: admin
-    url: jdbc:mysql://127.0.0.1:3306/unicorn?useSSL=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
-    username: admin
-    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/Unicorn?useSSL=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    username: developer
+    password: admin
     ### mysql驱动5.1
     ###driver-class-name: com.mysql.jdbc.Driver
     ### mysql驱动8.0
@@ -25,7 +25,7 @@ spring:
     database: 0
     host: 127.0.0.1
     port: 6379
-    password:
+    password: admin
     timeout: 3000
     lettuce:
       pool:
