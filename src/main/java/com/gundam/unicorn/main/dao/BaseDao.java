@@ -39,7 +39,9 @@ public interface BaseDao<T> {
      * 查询所有接口（后面考虑再改一下和page整合）
      * @return
      */
-    List<T> get();
+    List<T> get(int page, int pageNum);
+
+    int selectCount();
 
     /**
      * 根据id查找对象接口
@@ -48,12 +50,6 @@ public interface BaseDao<T> {
      */
     T findById(String id);
 
-    /**
-     * 根据字段查找拥有此字段的数量
-     * @param value
-     * @return
-     */
-    int findNumById(String value);
 
     /**
      * 根据查询条件筛选数据(再考虑)

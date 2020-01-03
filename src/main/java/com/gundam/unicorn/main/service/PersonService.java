@@ -1,6 +1,7 @@
 package com.gundam.unicorn.main.service;
 
 import com.gundam.unicorn.entity.Person;
+import com.gundam.unicorn.utils.Result;
 
 import java.util.List;
 
@@ -10,10 +11,7 @@ import java.util.List;
  */
 public interface PersonService extends BaseService<Person> {
 
-    /**
-     * 进行Token验证
-     * @param staffNum
-     * @return
-     */
-    String findUserByUserName(String staffNum);
+    Result login(String personName, String password);
+
+    Result logout(String personId);
 }

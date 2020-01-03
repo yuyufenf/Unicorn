@@ -4,7 +4,9 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!-- 数据库驱动:选择你的本地硬盘上面的数据库驱动包-->
-    <classPathEntry  location="F:\path\MavenRepository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
+    <!-- <classPathEntry  location="F:\path\MavenRepository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/> -->
+    <!-- 这里驱动包写在pom里了 -->
+
     <context id="DB2Tables"  targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="true"/>
@@ -12,7 +14,7 @@
             <property name="suppressAllComments" value="false"/>
         </commentGenerator>
         <!--数据库连接驱动类,URL，用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1/visitor?characterEncoding=utf-8" userId="admin" password="123456">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1/Unicorn?characterEncoding=utf-8" userId="developer" password="admin">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -30,7 +32,19 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="main.java.com.gundam.unicorn.main.dao" targetProject="src">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
+        <!-- table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 -->
+        <!--如果想生成一个表则tableName="table_name"-->
+        <!--<table tableName="%"
+               enableCountByExample="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true"
+               selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="false" /> -->
+        <!-- 数据库表主键 -->
+        <!-- <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table> -->
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table tableName="visitor_person" domainObjectName="Person" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="TB_User" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>

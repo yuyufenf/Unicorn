@@ -18,6 +18,6 @@ public interface PersonDao extends BaseDao<Person>{
      * @param userName
      * @return
      */
-    String findUserByUserName(String userName);
+    Person findUserByUserName(String userName);
 
 }

@@ -37,6 +37,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(PermissionDeniedException.class)
     public Result getPermissionException(PermissionDeniedException e){
         log.debug(PermissionDeniedException.class + "被抓取");
-        return Result.error(Result.SESSION_ERROR, e.getMessage());
+        return Result.error(Result.TOKEN_ERROR, e.getMessage());
     }
 }

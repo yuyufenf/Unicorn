@@ -31,13 +31,13 @@ public interface BaseService<T> {
     Result delete(String id);
 
     /**
-     * 获取对象方法（后期添加page）
+     * 获取列表方法（后期添加page）
      * @return 所有对象组成的list集合
      */
-    Result get();
+    Result get(int page, int pageNum);
 
     /**
-     * 根据id获得对象方法（考虑是否限制在dao层，一般业务很少有这种需要传递至前台）
+     * 根据id获得对象方法
      * @param id
      * @return 查找到的单一对象或空
      */
@@ -45,8 +45,8 @@ public interface BaseService<T> {
 
     /**
      * 根据字段查询此字段存在于多少条数据中
-     * @param value
+     * @param t
      * @return 返回数据条目
      */
-    Result findNumById(String value);
+    Result search(T t);
 }
