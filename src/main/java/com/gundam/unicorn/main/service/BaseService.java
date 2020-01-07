@@ -28,7 +28,7 @@ public interface BaseService<T> {
      * @param id
      * @return 成功信息或失败信息
      */
-    Result delete(String id);
+    Result delete(Long id);
 
     /**
      * 获取列表方法（后期添加page）
@@ -41,7 +41,7 @@ public interface BaseService<T> {
      * @param id
      * @return 查找到的单一对象或空
      */
-    Result findById(String id);
+    Result findById(Long id);
 
     /**
      * 根据字段查询此字段存在于多少条数据中

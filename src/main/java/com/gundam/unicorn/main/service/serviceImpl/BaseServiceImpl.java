@@ -36,7 +36,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
-    public Result delete(String id) {
+    public Result delete(Long id) {
         int result = baseDao.delete(id);
         if(result > 0){
             return Result.success(null, 0, "删除成功！");
@@ -57,7 +57,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
-    public Result findById(String id) {
+    public Result findById(Long id) {
         try{
             T result = baseDao.findById(id);
             return Result.success(result, 0, "数据获取成功");

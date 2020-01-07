@@ -3,7 +3,10 @@ package com.gundam.unicorn.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 /**
@@ -47,7 +50,7 @@ public class StringUtils {
      * 创建一个16位纯数字UUID
      * @return
      */
-    public static String mkUUID(){
+    public static Long mkUUID(){
         int random =(int)(Math.random()*9 + 1);
         String valueOf = String.valueOf(random);
         int hashCode = UUID.randomUUID().toString().hashCode();
@@ -58,7 +61,7 @@ public class StringUtils {
 
         String uuid = valueOf + String.format("%015d", hashCode);
 
-        return uuid;
+        return Long.valueOf(uuid);
     }
 
     /**
@@ -143,6 +146,11 @@ public class StringUtils {
         }
     }
 
+    /**
+     * LatinOne转UTF-8
+     * @param str
+     * @return
+     */
     public static String converLatin2UTF(String str){
         try{
             if(StringUtils.isEmpty(str)){
@@ -155,6 +163,29 @@ public class StringUtils {
             log.error(e.getMessage());
             return null;
         }
+    }
+
+    /**
+     * 对字符串进行md5加密,主要用于登录,不考虑非空是因为有拦截器和页面校验
+     * @param str
+     * @return
+     */
+    public static String md5(String str){
+        //存放哈希值结果的 byte 数组。
+        byte[] secretBytes = null;
+        try {
+            //getInstance("md5"):返回实现指定摘要算法的 MessageDigest 对象
+            //digest(byte[] ..)使用指定的 byte 数组对摘要进行最后更新，然后完成摘要计算
+            secretBytes = MessageDigest.getInstance("md5").digest(
+                    str.getBytes());
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("没有md5这个算法！");
+        }
+        String md5code = new BigInteger(1, secretBytes).toString(16);
+        for (int i = 0; i < 32 - md5code.length(); i++) {
+            md5code = "0" + md5code;
+        }
+        return md5code;
     }
 
     /**

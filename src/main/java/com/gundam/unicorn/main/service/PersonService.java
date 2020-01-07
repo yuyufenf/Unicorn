@@ -10,8 +10,4 @@ import java.util.List;
  * @date 2019/7/19 11:29
  */
 public interface PersonService extends BaseService<Person> {
-
-    Result login(String personName, String password);
-
-    Result logout(String personId);
 }

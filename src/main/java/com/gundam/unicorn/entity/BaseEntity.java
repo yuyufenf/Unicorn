@@ -18,7 +18,7 @@ public abstract class BaseEntity implements Serializable {
     private static final long serialVersionUID = 2791885284390539379L;
 
     @ApiModelProperty(value = "字段ID(\"后端自动生成\")", required = true)
-    protected String id;
+    protected Long id;
 
     @ApiModelProperty(value = "创建时间(\"后端自动生成\")")
     protected Date createDate;

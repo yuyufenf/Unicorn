@@ -32,24 +32,6 @@ public class PersonController {
     @Resource
     private PersonService personService;
 
-    @ApiOperation(value = "用户登录")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK!"),
-            @ApiResponse(code = 500, message = "系统异常"),
-            @ApiResponse(code = 505, message = "请求次数过多")})
-    @PostMapping(value = "/login")
-    public Result login(@RequestBody @ValueNotBlank String personName, @RequestBody @ValueNotBlank String password){
-        return personService.login(personName, password);
-    }
-
-    @ApiOperation(value = "用户登出")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK!"),
-            @ApiResponse(code = 500, message = "系统异常"),
-            @ApiResponse(code = 505, message = "请求次数过多")})
-    @PostMapping(value = "/logout")
-    public Result logout(){
-        return null;
-    }
-
     /**
      * 查询账号列表接口
      * @return
@@ -65,6 +47,11 @@ public class PersonController {
         return personService.get(page, pageNum);
     }
 
+    /**
+     * 条件查询接口
+     * @param person
+     * @return
+     */
     @ApiOperation(value = "根据条件查询人员信息")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK!"),
             @ApiResponse(code = 500, message = "系统异常"),
@@ -87,7 +74,7 @@ public class PersonController {
             @ApiResponse(code = 504, message = "非法请求"),
             @ApiResponse(code = 505, message = "请求次数过多")})
     @GetMapping(value = "/getPerson")
-    public Result getPerson(@RequestBody @ValueNotBlank String personId){
+    public Result getPerson(@RequestBody @ValueNotBlank Long personId){
         return personService.findById(personId);
     }
 
@@ -139,7 +126,7 @@ public class PersonController {
             @ApiResponse(code = 504, message = "非法请求"),
             @ApiResponse(code = 505, message = "请求次数过多")})
     @DeleteMapping(value = "/personDelete")
-    public Result delete(@RequestBody @ValueNotBlank String personId){
+    public Result delete(@RequestBody @ValueNotBlank Long personId){
         return personService.delete(personId);
     }
 

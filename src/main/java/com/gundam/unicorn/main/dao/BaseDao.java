@@ -33,7 +33,7 @@ public interface BaseDao<T> {
      * @param id
      * @return
      */
-    int delete(String id);
+    int delete(Long id);
 
     /**
      * 查询所有接口（后面考虑再改一下和page整合）
@@ -48,7 +48,7 @@ public interface BaseDao<T> {
      * @param id
      * @return
      */
-    T findById(String id);
+    T findById(Long id);
 
 
     /**

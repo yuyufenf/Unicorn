@@ -22,31 +22,4 @@ import java.util.Map;
 @Slf4j
 @Service
 public class PersonServiceImpl extends BaseServiceImpl<Person> implements PersonService {
-
-    @Resource
-    private PersonDao personDao;
-
-
-    @Override
-    public Result login(String personName, String password) {
-
-        try {
-            Person person = personDao.findUserByUserName(personName);
-
-            if(StringUtils.isBlank(person)){
-                return Result.error(Result.REQUEST_ERROR,"当前用户不存在");
-            }
-
-
-        } catch (Exception e){
-
-        }
-
-        return null;
-    }
-
-    @Override
-    public Result logout(String personId) {
-        return null;
-    }
 }

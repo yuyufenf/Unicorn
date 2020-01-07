@@ -12,12 +12,4 @@ import java.util.Map;
  */
 @Mapper
 public interface PersonDao extends BaseDao<Person>{
-
-    /**
-     * 通过登录名查询用户密码
-     * @param userName
-     * @return
-     */
-    Person findUserByUserName(String userName);
-
 }
