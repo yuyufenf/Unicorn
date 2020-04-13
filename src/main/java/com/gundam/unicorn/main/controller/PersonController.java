@@ -3,6 +3,8 @@ package com.gundam.unicorn.main.controller;
 import com.gundam.unicorn.entity.Person;
 import com.gundam.unicorn.main.service.PersonService;
 import com.gundam.unicorn.utils.Result;
+import com.gundam.unicorn.utils.annotation.PassLogin;
+import com.gundam.unicorn.utils.annotation.PassToken;
 import com.gundam.unicorn.utils.annotation.ValueNotBlank;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -91,6 +93,7 @@ public class PersonController {
             @ApiResponse(code = 504, message = "非法请求"),
             @ApiResponse(code = 505, message = "请求次数过多")})
     @PostMapping(value = "/personSave")
+    @PassToken
     public Result add(@RequestBody @Valid Person person){
         return personService.add(person);
     }

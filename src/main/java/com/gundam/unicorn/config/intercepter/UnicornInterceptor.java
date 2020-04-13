@@ -6,16 +6,13 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.gundam.unicorn.entity.User;
-import com.gundam.unicorn.main.dao.UserDao;
-import com.gundam.unicorn.main.service.PersonService;
+import com.gundam.unicorn.main.mapper.UserMapper;
 import com.gundam.unicorn.utils.IpUtils;
 import com.gundam.unicorn.utils.StringUtils;
-import com.gundam.unicorn.utils.annotation.Authority;
 import com.gundam.unicorn.utils.annotation.PassLogin;
 import com.gundam.unicorn.utils.annotation.PassToken;
 import com.gundam.unicorn.utils.exception.PermissionDeniedException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -24,9 +21,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * 登陆拦截器（可能会包含一部分非登陆用拦截）
@@ -38,7 +32,7 @@ import java.util.List;
 public class UnicornInterceptor implements HandlerInterceptor {
 
     @Resource
-    UserDao userDao;
+    UserMapper userDao;
 
     /**
      * 此方法是在访问接口之前执行的，我们只需要在这里写验证登陆状态的业务逻辑，就可以在用户调用指定接口之前验证登陆状态了
@@ -67,13 +61,14 @@ public class UnicornInterceptor implements HandlerInterceptor {
         log.info("############Request URL:" + request.getRequestURL().toString());
         log.info("############Request Method:" + request.getMethod());
         log.info("############Request Token:" + request.getHeader("Token"));
-        log.info("############User Interceptor End##############");
+        log.info("############User PassTokenInterceptor End##############");
 
         if(method.isAnnotationPresent(PassToken.class)){
             PassToken passToken = method.getAnnotation(PassToken.class);
             if (passToken.required()) {
                 return true;
             }
+            return true;
         }
 
         if(method.isAnnotationPresent(PassLogin.class)){

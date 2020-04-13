@@ -1,10 +1,9 @@
 package com.gundam.unicorn.main.service.serviceImpl;
 
-import com.gundam.unicorn.main.dao.BaseDao;
+import com.gundam.unicorn.main.mapper.BaseMapper;
 import com.gundam.unicorn.main.service.BaseService;
 import com.gundam.unicorn.utils.Result;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,7 +22,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     private static final String FETCH = "更新";
 
     @Resource
-    BaseDao<T> baseDao;
+    BaseMapper<T> baseMapper;
 
     @Override
     public Result add(T t) {
@@ -37,7 +36,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
     @Override
     public Result delete(Long id) {
-        int result = baseDao.delete(id);
+        int result = baseMapper.delete(id);
         if(result > 0){
             return Result.success(null, 0, "删除成功！");
         }
@@ -47,8 +46,8 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     @Override
     public Result get(int page, int pageNum) {
         try{
-            List<T> result = baseDao.get(page * pageNum, pageNum);
-            int num = baseDao.selectCount();
+            List<T> result = baseMapper.get(page * pageNum, pageNum);
+            int num = baseMapper.selectCount();
             return Result.success(result, num, "数据获取成功");
         }catch(Exception e){
             log.error("获取失败报错信息:[{}]", e.getMessage(), e);
@@ -59,7 +58,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     @Override
     public Result findById(Long id) {
         try{
-            T result = baseDao.findById(id);
+            T result = baseMapper.findById(id);
             return Result.success(result, 0, "数据获取成功");
         }catch(Exception e){
             log.error("获取失败,报错信息:[{}]", e.getMessage(), e);
@@ -70,7 +69,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     //TODO 考虑是否和get合用一个dao方法
     @Override
     public Result search(T t) {
-        List<T> result = baseDao.selectBySearch(t);
+        List<T> result = baseMapper.selectBySearch(t);
         return Result.success(result, 0, "OK!");
     }
 
@@ -85,9 +84,9 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
         try {
             if(INSERT.equals(type)){
-                result = baseDao.add(t);
+                result = baseMapper.add(t);
             } else {
-                result = baseDao.modify(t);
+                result = baseMapper.modify(t);
             }
 
             //返回储存状态

@@ -1,4 +1,4 @@
-package com.gundam.unicorn.main.dao;
+package com.gundam.unicorn.main.mapper;
 
 import com.gundam.unicorn.entity.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2020/1/6 16:34
  */
 @Mapper
-public interface UserDao extends BaseDao<User>{
+public interface UserMapper extends BaseMapper<User>{
 
     /**
      * 通过登录名查询用户密码

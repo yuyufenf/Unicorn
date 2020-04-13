@@ -1,6 +1,5 @@
-package com.gundam.unicorn.main.dao;
+package com.gundam.unicorn.main.mapper;
 
-import com.gundam.unicorn.entity.Person;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,7 @@ import java.util.List;
  */
 @Component
 @Mapper
-public interface BaseDao<T> {
+public interface BaseMapper<T> {
 
     /**
      * 添加接口

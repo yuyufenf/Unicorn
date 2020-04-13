@@ -3,14 +3,13 @@ package com.gundam.unicorn.main.service.serviceImpl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.gundam.unicorn.entity.User;
-import com.gundam.unicorn.main.dao.UserDao;
+import com.gundam.unicorn.main.mapper.UserMapper;
 import com.gundam.unicorn.main.service.UserService;
 import com.gundam.unicorn.utils.Result;
 import com.gundam.unicorn.utils.StringUtils;
 import com.gundam.unicorn.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,10 +24,10 @@ import java.util.concurrent.TimeUnit;
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
     @Resource
-    UserDao userDao;
+    UserMapper userDao;
 
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+    @Resource
+    private RedisTemplate<String, String> redisTemplate;
 
     @Override
     public Result login(String userName, String password) {
